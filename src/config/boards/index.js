@@ -1,4 +1,4 @@
 import HRDBoard from './hrd';
-import EnglishBoard from './english';
+import SupportBoard from './support';
 
-export default [HRDBoard, HRDBoard];
+export default [HRDBoard, SupportBoard];

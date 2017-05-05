@@ -17,10 +17,10 @@ class App extends Component {
     // Bootstrapping default value
     boards.map((board, key) => {
       this.state[key] = {};
-      Object.keys(board.components).map((name, i) => {
+      board.components.map((boardGroup, i) => {
         this.state[key][i] = {};
-        const components = board.components[name];
-        components.map((component, index) => {
+        const boardGroupBlock = boardGroup.blocks;
+        boardGroupBlock.map((component, index) => {
           this.state[key][i][index] = {
             data: null,
           };
@@ -77,9 +77,8 @@ class App extends Component {
       console.log(`Board ${boardIndex} not found`);
       return false;
     }
-    const boardPromises = Object.keys(board.components).map((key) => {
-      const name = board.components[key];
-      const promises = name.map((component) => component.resolver());
+    const boardPromises = board.components.map((boardGroup) => {
+      const promises = boardGroup.blocks.map((component) => component.resolver());
       return Promise.all(promises);
     });
 
@@ -135,12 +134,13 @@ class App extends Component {
             <Section key={key}>
               <div className={`board board-${key}`}>
                 <Container>
-                  {Object.keys(board.components).map((index, num) => {
-                    const component = board.components[index];
+                  {board.components.map((boardGroup, num) => {
                     return (
-                      <BlockWrapper type={index} key={num}>
-                        {component.map((compo, i) => (
-                          <Block title={this.checkIfDataIsNull(key) ? null : compo.title} key={i}>
+                      <BlockWrapper columnWidth={boardGroup.columns} key={num}>
+                        {boardGroup.blocks.map((compo, i) => (
+                          <Block
+                            type={compo.type}
+                            title={this.checkIfDataIsNull(key) ? null : compo.title} key={i}>
                             {this.checkIfDataIsNull(key) ? (
                               <div className="board-loading">
                                 <Loading />

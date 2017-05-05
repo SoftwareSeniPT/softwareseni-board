@@ -6,8 +6,9 @@ import './style.css';
 class BlockWrapper extends Component {
   render() {
     const blockWrapperClass = className('block-wrapper-component', {
-      'block-square': this.props.type === 'square',
-      'block-long': this.props.type === 'long',
+      'block-wrapper-1': this.props.columnWidth === 1,
+      'block-wrapper-2': this.props.columnWidth === 2,
+      'block-wrapper-3': this.props.columnWidth === 3,
     });
     return (
       <div className={blockWrapperClass}>
@@ -19,7 +20,7 @@ class BlockWrapper extends Component {
 
 BlockWrapper.propTypes = {
   children: PropTypes.array,
-  type: PropTypes.oneOf(['square', 'long']),
+  columnWidth: PropTypes.number,
 };
 
 export default BlockWrapper;

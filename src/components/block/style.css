@@ -1,12 +1,17 @@
 .block-component {
-  height: calc(35vh - 2vh);
-  width: calc(35vh - 2vh);
+  height: calc(33.3vh - 2vh);
+  width: calc(33.3vh - 2vh);
   display: inline-block;
   position: relative;
+  vertical-align: top;
 }
 
-.block-long .block-component {
-  height: calc(65vh - 2vh);
+.block-component.block-long-vertical {
+  height: calc(66.6vh - 2vh);
+}
+
+.block-component.block-long-horizontal {
+  width: calc(66.6vh - 2vh);
 }
 
 .block-component-title {
