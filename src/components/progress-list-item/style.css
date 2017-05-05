@@ -1,0 +1,31 @@
+.progress-list-item-text {
+    position: relative;
+    padding-right: 5vh;
+}
+
+.progress-list-item-total {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.progress-list-item-bar {
+    border-bottom: 0.2vh solid #5e7794;
+    position: relative;
+    margin-top: 1.5vh;
+    margin-bottom: 1.5vh;
+}
+
+.progress-list-item-percentage {
+    position: absolute;
+    left: 0;
+    background: #3fb4f9;
+    height: 0.6vh;
+    top: 50%;
+    margin-top: -0.3vh;
+    transition: width 0.5s;
+}
+
+.notLoaded .progress-list-item-percentage {
+    width: 0% !important;
+}

@@ -1,0 +1,16 @@
+.Section {
+  position: relative;
+}
+
+.loader.loader--style1 {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -3vh;
+    margin-top: -3vh;
+}
+
+.loader.loader--style1 svg {
+    width: 6vh;
+    height: 6vh;
+}

@@ -1,0 +1,13 @@
+.gauge-label-start, .gauge-label-end {
+    font-size: 2.6vh;
+}
+
+.gauge-el svg {
+  padding: 0 2vh;
+  margin-left: -2vh;
+}
+
+.gauge-value {
+    font-size: 6vh;
+    text-align: center;
+}
