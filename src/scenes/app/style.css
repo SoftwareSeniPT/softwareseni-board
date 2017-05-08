@@ -1,5 +1,5 @@
 .Section {
-  position: relative;
+    position: relative;
 }
 
 .loader.loader--style1 {
@@ -13,4 +13,14 @@
 .loader.loader--style1 svg {
     width: 6vh;
     height: 6vh;
+}
+
+.board-name {
+    position: absolute;
+    bottom: 2vh;
+    right: 5vh;
+    font-size: 4vh;
+    color: #fff;
+    font-weight: 600;
+    opacity: 0.5;
 }

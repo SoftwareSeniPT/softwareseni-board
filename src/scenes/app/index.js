@@ -128,6 +128,10 @@ class App extends Component {
           scrollCallback={(data) => {
             const { activeSection } = data;
             this.loadBoard(activeSection);
+            // Get board name
+            // const { name } = boards[activeSection];
+            // console.log(name, 'name');
+            // this.setState({ activeBoardName: name });
           }}
           anchors={boards.map((board, key) => (`board-${key}`))}>
           {boards.map((board, key) => (
@@ -156,6 +160,10 @@ class App extends Component {
             </Section>
           ))}
         </SectionsContainer>
+
+        {this.state.activeBoardName && (
+          <div className="board-name">{this.state.activeBoardName}</div>
+        )}
       </div>
     );
   }

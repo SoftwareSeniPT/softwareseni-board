@@ -10,7 +10,7 @@
 }
 
 .progress-list-item-bar {
-    border-bottom: 0.2vh solid #5e7794;
+    border-bottom: 0.2vh solid #3d4554;
     position: relative;
     margin-top: 1.5vh;
     margin-bottom: 1.5vh;
@@ -28,4 +28,9 @@
 
 .notLoaded .progress-list-item-percentage {
     width: 0% !important;
+}
+
+.progress-list-item.noProgress {
+    border-bottom: 0.2vh solid #3d4554;
+    padding-bottom: 1.6vh;
 }

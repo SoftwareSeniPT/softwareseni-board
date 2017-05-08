@@ -1,0 +1,40 @@
+.block-component-chart {
+    padding-bottom: 36%;
+    position: relative;
+}
+
+.block-component-chart .recharts-responsive-container {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.block-component-chart .recharts-cartesian-grid-horizontal>* {
+    stroke: #3d4554;
+}
+
+.block-component-chart .recharts-cartesian-axis-tick text {
+    fill: #fff;
+}
+
+.block-component-chart .recharts-x-axis .recharts-cartesian-axis-tick text {
+    transform: translateY(1.6vh);
+    font-size: 1.7vh;
+}
+
+.block-component-chart .recharts-y-axis .recharts-cartesian-axis-tick text {
+    transform: translateX(-3vh);
+    font-size: 1.7vh;
+}
+
+.block-component-chart .recharts-wrapper > .recharts-surface > * {
+    transform: translateX(-1.5vh);
+}
+
+.block-component-chart .recharts-legend-wrapper {
+    transform: translate(-1.5vh, -1vh);
+}

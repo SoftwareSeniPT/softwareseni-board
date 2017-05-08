@@ -17,10 +17,11 @@ class ProgressListItem extends Component {
     });
   }
   render() {
-    const { title, number, percentage, space } = this.props;
+    const { title, number, percentage, space, progress } = this.props;
     const progressClass = className('progress-list-item', {
       isLoaded: this.state.isLoaded,
       notLoaded: !this.state.isLoaded,
+      noProgress: !progress,
     });
     return (
       <div className={progressClass} style={{ marginBottom: `${space}vh` }}>
@@ -30,9 +31,11 @@ class ProgressListItem extends Component {
             <AnimateNumber number={number} speed={500 / number} />
           </div>
         </div>
-        <div className="progress-list-item-bar">
-          <div className="progress-list-item-percentage" style={{ width: `${percentage}%` }} />
-        </div>
+        {progress && (
+          <div className="progress-list-item-bar">
+            <div className="progress-list-item-percentage" style={{ width: `${percentage}%` }} />
+          </div>
+        )}
       </div>
     );
   }
@@ -43,6 +46,7 @@ ProgressListItem.propTypes = {
   number: PropTypes.number,
   percentage: PropTypes.number,
   space: PropTypes.number,
+  progress: PropTypes.boolean,
 };
 
 export default ProgressListItem;

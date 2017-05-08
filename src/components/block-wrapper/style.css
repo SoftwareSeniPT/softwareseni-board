@@ -6,11 +6,11 @@
 }
 
 .block-wrapper-1 {
-    width: calc(33.3vh - 2vh);
+    width: 32vh;
 }
 .block-wrapper-2 {
-    width: calc(66.6vh - 2vh);
+    width: 64vh;
 }
 .block-wrapper-3 {
-    width: calc(99.9vh - 2vh);
+    width: 96vh;
 }
