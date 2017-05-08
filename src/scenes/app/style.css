@@ -15,12 +15,21 @@
     height: 6vh;
 }
 
-.board-name {
+.board-name, .company-logo {
     position: absolute;
     bottom: 2vh;
     right: 5vh;
-    font-size: 4vh;
+    font-size: 3vh;
     color: #fff;
     font-weight: 600;
     opacity: 0.5;
+}
+
+.company-logo {
+  right: auto;
+  left: 5vh;
+}
+
+.company-logo svg {
+    width: 22vh;
 }

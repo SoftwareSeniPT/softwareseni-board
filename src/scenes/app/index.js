@@ -1,33 +1,63 @@
 import React, { Component } from 'react';
-import { SectionsContainer, Section } from 'react-fullpage';
+// import { SectionsContainer, Section } from 'react-fullpage';
+import { Fullpage, Slide, HorizontalSlider, changeFullpageSlide } from 'fullpage-react';
 import Container from '../../components/container';
 import BlockWrapper from '../../components/block-wrapper';
 import Block from '../../components/block';
 import boards from '../../config/boards';
 import Loading from '../../components/loading';
+import SSLogo from '../../components/ss-logo';
 import config from '../../config/global';
 import './style.css';
+
+// const prevSlide = changeFullpageSlide.bind(null, 'PREV');
+// const nextSlide = changeFullpageSlide.bind(null, 'NEXT');
+// const backToTop = changeFullpageSlide.bind(null, 0);
+
+const fullPageOptions = {
+  scrollSensitivity: 2,
+  touchSensitivity: 2,
+  scrollSpeed: 500,
+  resetSlides: true,
+  hideScrollBars: true,
+  onSlideChangeStart: () => {},
+  onSlideChangeEnd: () => {},
+};
+
+const horizontalSliderProps = {
+  name: 'horizontalSlider1',
+  scrollSpeed: 500,
+  infinite: true,
+  resetSlides: false,
+  scrollSensitivity: 2,
+  touchSensitivity: 2,
+};
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.activeBoard = 0;
     this.totalBoard = boards.length;
-    this.state = {};
+    const boardObject = {};
     // Bootstrapping default value
     boards.map((board, key) => {
-      this.state[key] = {};
+      boardObject[key] = {};
       board.components.map((boardGroup, i) => {
-        this.state[key][i] = {};
+        boardObject[key][i] = {};
         const boardGroupBlock = boardGroup.blocks;
         boardGroupBlock.map((component, index) => {
-          this.state[key][i][index] = {
+          boardObject[key][i][index] = {
             data: null,
           };
         });
       });
       return board;
     });
+
+    this.state = {
+      boards: boardObject,
+      activeBoardName: boards[0].name,
+    };
 
     this.checkIfDataIsNull = this.checkIfDataIsNull.bind(this);
     this.resetBoardDataExcept = this.resetBoardDataExcept.bind(this);
@@ -52,12 +82,13 @@ class App extends Component {
     }, config.timeoutDuration);
   }
   resetBoardDataExcept(activeBoardIndex) {
-    Object.keys(this.state).map((stateKey) => {
+    const boardObject = {};
+    Object.keys(this.state.boards).map((stateKey) => {
       if (parseInt(stateKey, 10) !== activeBoardIndex) {
         const resetState = {};
-        Object.keys(this.state[stateKey]).map((sectionKey) => {
+        Object.keys(this.state.boards[stateKey]).map((sectionKey) => {
           resetState[sectionKey] = {};
-          Object.keys(this.state[stateKey][sectionKey]).map((boardKey) => {
+          Object.keys(this.state.boards[stateKey][sectionKey]).map((boardKey) => {
             resetState[sectionKey][boardKey] = {
               data: null,
             };
@@ -65,11 +96,11 @@ class App extends Component {
           });
           return sectionKey;
         });
-
-        this.setState({ [stateKey]: resetState });
+        boardObject[stateKey] = resetState;
       }
       return stateKey;
     });
+    this.setState({ boards: Object.assign({}, this.state.boards, boardObject) });
   }
   loadBoardData(boardIndex, callback) {
     const board = boards[boardIndex];
@@ -94,7 +125,7 @@ class App extends Component {
               };
             });
           });
-          this.setState({ [boardIndex]: resultObject }, callback);
+          this.setState({ boards: Object.assign({}, this.state.boards, { [boardIndex]: resultObject }) }, callback);
         }
       });
   }
@@ -105,7 +136,7 @@ class App extends Component {
     });
   }
   checkIfDataIsNull(boardIndex) {
-    const board = this.state[boardIndex];
+    const board = this.state.boards[boardIndex];
     const nullComponents = Object.keys(board).filter((key) => {
       const data = board[key];
       const filteredData = Object.keys(data).filter((i) => {
@@ -123,19 +154,9 @@ class App extends Component {
   render() {
     return (
       <div className="app">
-        <SectionsContainer
-          navigation={false}
-          scrollCallback={(data) => {
-            const { activeSection } = data;
-            this.loadBoard(activeSection);
-            // Get board name
-            // const { name } = boards[activeSection];
-            // console.log(name, 'name');
-            // this.setState({ activeBoardName: name });
-          }}
-          anchors={boards.map((board, key) => (`board-${key}`))}>
+        <Fullpage {...fullPageOptions} >
           {boards.map((board, key) => (
-            <Section key={key}>
+            <Slide key={key}>
               <div className={`board board-${key}`}>
                 <Container>
                   {board.components.map((boardGroup, num) => {
@@ -149,7 +170,7 @@ class App extends Component {
                               <div className="board-loading">
                                 <Loading />
                               </div>
-                            ) : compo.component(this.state[key][num][i].data)}
+                            ) : compo.component(this.state.boards[key][num][i].data)}
                           </Block>
                         ))}
                       </BlockWrapper>
@@ -157,13 +178,17 @@ class App extends Component {
                   })}
                 </Container>
               </div>
-            </Section>
+            </Slide>
           ))}
-        </SectionsContainer>
+        </Fullpage>
 
         {this.state.activeBoardName && (
           <div className="board-name">{this.state.activeBoardName}</div>
         )}
+
+        <div className="company-logo">
+          <SSLogo fill="rgba(255, 255, 255, 0.48)" />
+        </div>
       </div>
     );
   }
