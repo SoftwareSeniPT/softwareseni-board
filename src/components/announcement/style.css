@@ -1,0 +1,24 @@
+.announcement-component-key {
+    width: 6vh;
+    height: 6vh;
+    background: #3fb4f9;
+    border-radius: 50%;
+    font-size: 4vh;
+    font-weight: 700;
+    text-align: center;
+    padding: 0.6vh 0;
+    box-sizing: border-box;
+    position: absolute;
+    left: 0;
+}
+
+.announcement-component-wrapper {
+    position: relative;
+    padding-left: 8vh;
+    margin-top: 3vh;
+}
+
+.announcement-component-value {
+    font-size: 2.2vh;
+    line-height: 1.5;
+}

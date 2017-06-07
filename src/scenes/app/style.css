@@ -2,6 +2,12 @@
     position: relative;
 }
 
+.slider-section {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
 .loader.loader--style1 {
     position: absolute;
     left: 50%;
@@ -16,7 +22,7 @@
 }
 
 .board-name, .company-logo {
-    position: absolute;
+    position: fixed;
     bottom: 2vh;
     right: 5vh;
     font-size: 3vh;

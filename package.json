@@ -5,15 +5,16 @@
   "dependencies": {
     "classnames": "^2.2.5",
     "d3": "^3.5.6",
-    "fullpage-react": "^2.0.3",
     "moment": "^2.18.1",
     "prop-types": "^15.5.8",
     "react": "^15.5.4",
     "react-animate-number": "^0.1.4",
     "react-dom": "^15.5.4",
     "react-fittext": "0.0.7",
-    "react-fullpage": "^0.1.16",
-    "recharts": "^0.22.4"
+    "react-slick": "^0.14.11",
+    "recharts": "^0.22.4",
+    "slick-carousel": "^1.6.0",
+    "timeago.js": "^3.0.1"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",

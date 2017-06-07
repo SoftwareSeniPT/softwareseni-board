@@ -9,6 +9,9 @@ class Block extends Component {
       'block-square': this.props.type === 'square',
       'block-long-vertical': this.props.type === 'long-vertical',
       'block-long-horizontal': this.props.type === 'long-horizontal',
+      'block-full-square': this.props.type === 'full-square',
+      'block-full-horizontal': this.props.type === 'full-horizontal',
+      'block-full-vertical': this.props.type === 'full-vertical',
     });
 
     return (
@@ -29,7 +32,7 @@ class Block extends Component {
 Block.propTypes = {
   children: PropTypes.node,
   title: PropTypes.string,
-  type: PropTypes.oneOf(['square', 'long-vertical', 'long-horizontal']),
+  type: PropTypes.oneOf(['square', 'long-vertical', 'long-horizontal', 'full-horizontal']),
 };
 
 export default Block;

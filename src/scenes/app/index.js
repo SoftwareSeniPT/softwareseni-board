@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 // import { SectionsContainer, Section } from 'react-fullpage';
-import { Fullpage, Slide, HorizontalSlider, changeFullpageSlide } from 'fullpage-react';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 import Container from '../../components/container';
 import BlockWrapper from '../../components/block-wrapper';
 import Block from '../../components/block';
@@ -10,27 +12,17 @@ import SSLogo from '../../components/ss-logo';
 import config from '../../config/global';
 import './style.css';
 
-// const prevSlide = changeFullpageSlide.bind(null, 'PREV');
-// const nextSlide = changeFullpageSlide.bind(null, 'NEXT');
-// const backToTop = changeFullpageSlide.bind(null, 0);
-
-const fullPageOptions = {
-  scrollSensitivity: 2,
-  touchSensitivity: 2,
-  scrollSpeed: 500,
-  resetSlides: true,
-  hideScrollBars: true,
-  onSlideChangeStart: () => {},
-  onSlideChangeEnd: () => {},
-};
-
-const horizontalSliderProps = {
-  name: 'horizontalSlider1',
-  scrollSpeed: 500,
+const sliderSettings = {
+  dots: false,
   infinite: true,
-  resetSlides: false,
-  scrollSensitivity: 2,
-  touchSensitivity: 2,
+  speed: 500,
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  arrows: false,
+  swipe: true,
+  swipeToSlide: true,
+  autoplay: config.autoSlide,
+  autoplaySpeed: config.timeoutDuration,
 };
 
 class App extends Component {
@@ -61,25 +53,16 @@ class App extends Component {
 
     this.checkIfDataIsNull = this.checkIfDataIsNull.bind(this);
     this.resetBoardDataExcept = this.resetBoardDataExcept.bind(this);
+    this.nextSlide = this.nextSlide.bind(this);
   }
   componentDidMount() {
-    // Loading board 1
     this.loadBoard(0);
+
     if (config.autoSlide) {
-      this.autoSlide();
+      setInterval(() => {
+        this.nextSlide();
+      }, config.timeoutDuration);
     }
-  }
-  autoSlide() {
-    setInterval(() => {
-      let nextBoard;
-      if (this.activeBoard >= (this.totalBoard - 1)) {
-        nextBoard = 0;
-      } else {
-        nextBoard = this.activeBoard + 1;
-      }
-      // Change board
-      window.location.hash = `#board-${nextBoard}`;
-    }, config.timeoutDuration);
   }
   resetBoardDataExcept(activeBoardIndex) {
     const boardObject = {};
@@ -125,15 +108,15 @@ class App extends Component {
               };
             });
           });
+
           this.setState({ boards: Object.assign({}, this.state.boards, { [boardIndex]: resultObject }) }, callback);
         }
-      });
+      })
+      .catch((error) => console.log(error, 'error'));
   }
   loadBoard(boardIndex) {
-    this.loadBoardData(boardIndex, () => {
-      this.activeBoard = boardIndex;
-      this.resetBoardDataExcept(boardIndex);
-    });
+    this.loadBoardData(boardIndex);
+    this.resetBoardDataExcept(boardIndex);
   }
   checkIfDataIsNull(boardIndex) {
     const board = this.state.boards[boardIndex];
@@ -141,7 +124,7 @@ class App extends Component {
       const data = board[key];
       const filteredData = Object.keys(data).filter((i) => {
         const dat = data[i];
-        if (!dat.data) return true;
+        if (!dat.data && dat.data !== 0) return true;
         return false;
       });
       if (filteredData.length) return true;
@@ -151,12 +134,23 @@ class App extends Component {
     if (nullComponents.length) return true;
     return false;
   }
+  nextSlide() {
+    this.slider.slickNext();
+  }
   render() {
     return (
       <div className="app">
-        <Fullpage {...fullPageOptions} >
+        <Slider
+          {...sliderSettings}
+          ref={(c) => (this.slider = c)}
+          afterChange={(boardIndex) => {
+            // console.log({ before, after })
+            this.loadBoard(boardIndex);
+            const { name } = boards[boardIndex];
+            this.setState({ activeBoardName: name });
+          }}>
           {boards.map((board, key) => (
-            <Slide key={key}>
+            <div className="slider-section" key={key}>
               <div className={`board board-${key}`}>
                 <Container>
                   {board.components.map((boardGroup, num) => {
@@ -178,9 +172,9 @@ class App extends Component {
                   })}
                 </Container>
               </div>
-            </Slide>
+            </div>
           ))}
-        </Fullpage>
+        </Slider>
 
         {this.state.activeBoardName && (
           <div className="board-name">{this.state.activeBoardName}</div>

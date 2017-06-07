@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import className from 'classnames';
 import moment from 'moment';
+import labelMapping from './label-mapping';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import './style.css';
 
@@ -19,10 +20,10 @@ class Chart extends Component {
 
     // Define lines
     const lines = [];
-    const colors = ['#3fb4f9', '#e5c852', '#e0614d', '#0f9d58', '#f07a19'];
+    const colors = ['#3fb4f9', '#e5c852', '#e0614d', '#0f9d58', '#f07a19', '#ffffff', '#F62459', '#81CFE0', '#87D37C'];
     Object.keys(value[0].content).map((key, i) => {
       lines.push({
-        name: key,
+        name: labelMapping(key),
         color: colors[i] || '#3fb4f9',
       });
     });
@@ -32,14 +33,17 @@ class Chart extends Component {
       const { content } = val;
       const contentObject = {};
       Object.keys(content).map((key) => {
-        contentObject[key] = parseInt(content[key], 10);
+        const label = labelMapping(key);
+        contentObject[label] = parseInt(content[key], 10);
       });
+
       // transform date
       const date = moment(val.title, 'MM-DD-YYYY');
 
-      return Object.assign({}, {
-        date: date.format('D MMM'),
+      const object = Object.assign({}, {
+        date: date.isValid() ? date.format('D MMM') : val.title,
       }, val, contentObject);
+      return object;
     });
 
     const blockWrapperClass = className('block-component-chart');

@@ -3,6 +3,11 @@
     position: relative;
 }
 
+.block-wrapper-3 .block-component-chart {
+    padding-bottom: 54%;
+    margin-top: 5%;
+}
+
 .block-component-chart .recharts-responsive-container {
     position: absolute;
     left: 0;
