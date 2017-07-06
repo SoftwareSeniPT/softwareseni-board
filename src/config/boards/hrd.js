@@ -33,10 +33,7 @@ export default {
     }, {
       title: 'Opened Position',
       type: 'long-vertical',
-      component: (value) => {
-        console.log(value, 'value');
-        return <ProgressList lists={value} space={3} />;
-      },
+      component: (value) => <ProgressList lists={value} space={3} />,
       resolver: () => spreadSheetData.selectSheet(4).getList(),
     }],
   }, {
