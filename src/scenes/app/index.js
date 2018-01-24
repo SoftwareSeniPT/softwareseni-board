@@ -155,7 +155,7 @@ class App extends Component {
                 <Container>
                   {board.components.map((boardGroup, num) => {
                     return (
-                      <BlockWrapper columnWidth={boardGroup.columns} key={num}>
+                      <BlockWrapper styles={boardGroup.styles} columnWidth={boardGroup.columns} key={num}>
                         {boardGroup.blocks.map((compo, i) => (
                           <Block
                             type={compo.type}

@@ -81,6 +81,24 @@ class SelectFromSpreadsheet {
           .filter((arr, key) => (key < max));
       });
   }
+  getListHorizontal() {
+    return fetch(this.link)
+      .then((response) => response.json())
+      .then((response) => response.feed.entry)
+      .then((response) => response.map((res) => {
+        const content = res.content.$t;
+        const contentArray = content.split(',');
+        if (contentArray && contentArray.length) {
+          return contentArray.reduce((acc, cont) => {
+            console.log(cont, 'cont');
+            const split = cont.split(': ');
+            acc[split[0]] = split[1];
+            return acc;
+          }, {});
+        }
+        return {};
+      }));
+  }
   getAllList() {
     return fetch(this.link)
       .then((response) => response.json())

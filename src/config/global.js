@@ -1,4 +1,4 @@
 export default {
-  autoSlide: true,
+  autoSlide: false,
   timeoutDuration: 30000,
 };

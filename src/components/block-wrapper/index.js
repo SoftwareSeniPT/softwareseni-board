@@ -11,7 +11,7 @@ class BlockWrapper extends Component {
       'block-wrapper-3': this.props.columnWidth === 3,
     });
     return (
-      <div className={blockWrapperClass}>
+      <div className={blockWrapperClass} style={this.props.styles}>
         {this.props.children}
       </div>
     );
@@ -21,6 +21,7 @@ class BlockWrapper extends Component {
 BlockWrapper.propTypes = {
   children: PropTypes.array,
   columnWidth: PropTypes.number,
+  styles: PropTypes.object,
 };
 
 export default BlockWrapper;

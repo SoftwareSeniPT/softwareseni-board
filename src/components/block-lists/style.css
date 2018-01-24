@@ -1,0 +1,47 @@
+.total-component {
+  font-size: 10vh;
+  line-height: 1;
+}
+
+.blockList-component {
+    overflow: hidden;
+    margin-top: -0.6vh;
+}
+
+.block-full-free {
+    display: block;
+}
+
+.blockList--itemWrapper {
+    background: #282c34;
+    color: #ffffff;
+    position: absolute;
+    left: 0.6vh;
+    right: 0.6vh;
+    top: 0.6vh;
+    bottom: 0.6vh;
+    font-size: 2.1vh;
+    padding: 2vh;
+    text-align: left;
+    border-radius: 0.4vh;
+        text-align: center;
+}
+
+.blockList--title {
+    font-size: 2.7vh;
+    font-weight: bold;
+}
+
+.blockList--latestScore {
+    font-size: 9.1vh;
+    background: #58e2c2;
+    width: 11.2vh;
+    height: 11.2vh;
+    border-radius: 50%;
+    margin: 2vh auto;
+}
+
+.blockList--member {
+    margin-top: 1vh;
+    font-style: italic;
+}

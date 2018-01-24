@@ -13,7 +13,7 @@ class ProgressList extends Component {
   }
 
   render() {
-    const { lists = [], progress = true } = this.props;
+    const { lists = [], progress = true, noRound } = this.props;
 
     if (!lists.length) {
       return (
@@ -33,6 +33,7 @@ class ProgressList extends Component {
             number={list.number}
             space={this.props.space}
             progress={progress}
+            noRound={noRound}
             percentage={list.percentage} />
         ))}
       </div>
@@ -44,6 +45,7 @@ ProgressList.propTypes = {
   lists: PropTypes.array,
   space: PropTypes.number,
   progress: PropTypes.boolean,
+  noRound: PropTypes.boolean,
 };
 
 export default ProgressList;

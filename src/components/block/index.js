@@ -12,6 +12,7 @@ class Block extends Component {
       'block-full-square': this.props.type === 'full-square',
       'block-full-horizontal': this.props.type === 'full-horizontal',
       'block-full-vertical': this.props.type === 'full-vertical',
+      'block-full-free': this.props.type === 'free',
     });
 
     return (
